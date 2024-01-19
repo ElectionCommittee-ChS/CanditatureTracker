@@ -3,7 +3,7 @@ const fs = require("fs");
 const { google } = require("googleapis");
 
 const service = google.sheets("v4");
-const credentials = require("./credentials.json");
+const credentials = require("./secret/credentials.json");
 
 // Configure auth client
 const authClient = new google.auth.JWT(
