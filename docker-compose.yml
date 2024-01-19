@@ -7,4 +7,7 @@ services:
     environment:
       - PORT=3000
     volumes:
-      - canditature-secrets:/usr/src/app/backend/secret
+      - ./backend/secret:/usr/src/app/backend/secret
+
+volumes:
+  canditature-secrets:
