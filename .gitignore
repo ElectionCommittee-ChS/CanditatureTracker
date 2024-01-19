@@ -1,0 +1,5 @@
+/backend/node_modules
+/backend/credentials.json
+/backend/public
+/frontend/node_modules
+/frontend/dist
