@@ -2,9 +2,9 @@
 import axios from 'axios'
 import { computed, ref, type ComputedRef, type Ref } from 'vue'
 
-interface DivVotes {
+interface Candidates {
   name: string
-  votes: number
+  candidates: number
 }
 
 interface divisions {
@@ -38,7 +38,7 @@ const colours_by_division: colours = {
 }
 
 async function get_vote_data() {
-  let data: DivVotes[] = []
+  let data: Candidates[] = []
   axios
     .get('/data.json')
     .then((res) => {
@@ -47,26 +47,25 @@ async function get_vote_data() {
     })
     .catch((err) => console.log(err))
 }
-const vote_data: Ref<DivVotes[]> = ref([])
+const vote_data: Ref<Candidates[]> = ref([])
 
 get_vote_data()
 
 const total_votes: ComputedRef<number> = computed(() => {
-  return vote_data.value.reduce((sum: number, div: DivVotes) => sum + div.votes, 0)
+  return vote_data.value.reduce((sum: number, div: Candidates) => sum + div.candidates, 0)
 })
 </script>
 
 <template>
-  <h1>FuM Candidature 2024 - Number of Candidates by division</h1>
-  <div class="division" v-for="(division, index) in vote_data" :key="division.name">
-    <div class="position">{{ index + 1 }}.</div>
-    <div class="percentage">{{ division.votes }}</div>
-    <div
-      class="bar"
-      :style="
-        'width: ' +
-        division.votes +
-        '%; background-color: ' +
+    <h1>FuM Candidature 2024 - Number of Candidates by Division</h1>
+    <div class="division" v-for="(division, index) in vote_data" :key="division.name">
+      <div class="position">{{ index + 1 }}.</div>
+      <div class="candidates">{{ division.candidates }}</div>
+      <div
+        class="bar"
+        :style="'width: ' +
+          division.candidates * 3 +
+                '%; background-color: ' +
         colours_by_division[division.name] +
         ';'
       "
@@ -101,8 +100,9 @@ h1 {
   font-weight: bold;
 }
 
-.percentage {
+.candidates {
   width: 50px;
+  /* font-weight: bold; */
 }
 
 .division {

@@ -32,6 +32,7 @@ async function getData() {
     // All of the answers
     const numOfCandidates = {
       A: 0,
+      AE: 0,
       D: 0,
       DS: 0,
       E: 0,
@@ -71,9 +72,9 @@ async function getData() {
       console.log("No data found.");
     }
 
-    let candidatesArray = Object.entries(numOfCandidates).map(([name, votes]) => ({ name, votes }));
-    // sort by votes
-    candidatesArray.sort((a, b) => b.votes - a.votes);
+    let candidatesArray = Object.entries(numOfCandidates).map(([name, candidates]) => ({ name, candidates }));
+    // sort by candidates
+    candidatesArray.sort((a, b) => b.candidates - a.candidates);
 
     // Saved the numOfCandidates
     fs.writeFileSync("public/data.json", JSON.stringify(candidatesArray), function (err, file) {
