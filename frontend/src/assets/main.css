@@ -33,11 +33,22 @@ a,
   transition: 0.4s;
 }
 
+main > img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  margin: 50px;
+}
+
 @media (hover: hover) {
   a:hover {
     background-color: hsla(160, 100%, 37%, 0.2);
   }
 }
 
-/* @media (min-width: 1024px) {
-} */
+@media (max-width: 600px) {
+  main > img {
+    width: 100px;
+  }
+}

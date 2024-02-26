@@ -92,14 +92,6 @@ hgroup {
   margin: 20px 0;
 }
 
-main > img {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 200px;
-  margin: 50px;
-}
-
 .division>div {
   padding: 5px;
   margin-bottom: 5px;
