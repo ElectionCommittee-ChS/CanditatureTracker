@@ -16,25 +16,25 @@ interface colours {
 }
 
 const colours_by_division: colours = {
-  A: 'red',
+  A: '#cc0000',
   D: '#fa6607',
   DS: 'darkseagreen',
-  E: 'yellow',
+  E: '#ffff00',
   F: 'black',
-  GS: 'Teal',
-  H: 'Orchid',
-  I: 'Purple',
-  IT: 'PaleTurquoise',
-  K: 'LimeGreen',
-  KfKb: 'DarkGreen',
-  M: 'Brown',
-  Sjö: 'DarkBlue',
-  TD: 'DarkRed',
+  GS: '#efc26a',
+  H: '#eb79ab',
+  I: '#9F36A1',
+  IT: '#09cdda',
+  K: '#5c9143',
+  KfKb: '#3D7620',
+  M: '#795548',
+  Sjö: '#1F2163',
+  TD: '#600010',
   Utomlandsstuderande: 'light-grey',
-  V: 'Lightblue',
-  Z: 'grey',
+  V: '#3d85c6',
+  Z: '#6E6E6E',
   TB: 'Beige',
-  AE: 'Chartreuse'
+  AE: '#54ce59'
 }
 
 async function get_vote_data() {
@@ -57,21 +57,25 @@ const total_votes: ComputedRef<number> = computed(() => {
 </script>
 
 <template>
-    <h1>FuM Candidature 2024 - Number of Candidates by Division</h1>
+  <main>
+    <hgroup>
+      <h1>FuM Candidature 2024</h1>
+      <h2>Number of Candidates by Division</h2>
+      <h3>Apply now at <a href="https://fumval.se">fumval.se</a></h3>
+    </hgroup>
     <div class="division" v-for="(division, index) in vote_data" :key="division.name">
       <div class="position">{{ index + 1 }}.</div>
       <div class="candidates">{{ division.candidates }}</div>
-      <div
-        class="bar"
-        :style="'width: ' +
-          division.candidates * 3 +
-                '%; background-color: ' +
+      <div class="bar" :style="'width: ' +
+        division.candidates * 3 +
+        '%; background-color: ' +
         colours_by_division[division.name] +
         ';'
-      "
-    ></div>
-    <div class="name">{{ division.name }}</div>
-  </div>
+        "></div>
+      <div class="name">{{ division.name }}</div>
+    </div>
+    <img src="@/assets/logo.svg" alt="Logo for Fullmäktige Election 2024">
+  </main>
 </template>
 
 <style scoped>
@@ -79,18 +83,37 @@ h1 {
   font-weight: bold;
 }
 
-.division > div {
+a {
+  color: var(--vt-c-blue);
+}
+
+hgroup {
+  text-align: center;
+  margin: 20px 0;
+}
+
+main > img {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 200px;
+  margin: 50px;
+}
+
+.division>div {
   padding: 5px;
   margin-bottom: 5px;
   height: 34px;
 }
+
 .bar {
   background-color: var(--vt-c-red);
 }
 
-.total > .bar {
+.total>.bar {
   background-color: var(--vt-c-blue);
 }
+
 .position {
   width: 26px;
   font-weight: bold;

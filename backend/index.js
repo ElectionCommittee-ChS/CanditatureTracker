@@ -2,8 +2,8 @@ const getData = require('./getData.js');
 const express = require('express');
 
 getData();
-// update data every 30 minutes
-setInterval(getData, 1800000);
+// update data every 15 minutes
+setInterval(getData, 15 * 60 * 1000);
 
 const app = express();
 const port = process.env.PORT || 3000;

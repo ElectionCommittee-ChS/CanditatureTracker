@@ -45,6 +45,7 @@ async function getData() {
       KfKb: 0,
       M: 0,
       Sjö: 0,
+      TB: 0,
       TD: 0,
       V: 0,
       Z: 0
