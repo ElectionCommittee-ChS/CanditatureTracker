@@ -67,7 +67,7 @@ const total_votes: ComputedRef<number> = computed(() => {
       <div class="position">{{ index + 1 }}.</div>
       <div class="candidates">{{ division.candidates }}</div>
       <div class="bar" :style="'width: ' +
-        division.candidates * 3 +
+        division.candidates * 3.5 +
         '%; background-color: ' +
         colours_by_division[division.name] +
         ';'
