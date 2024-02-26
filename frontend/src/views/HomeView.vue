@@ -83,10 +83,6 @@ h1 {
   font-weight: bold;
 }
 
-a {
-  color: var(--vt-c-blue);
-}
-
 hgroup {
   text-align: center;
   margin: 20px 0;
