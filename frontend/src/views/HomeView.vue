@@ -145,7 +145,7 @@ hgroup {
   justify-content: center;
   align-items: flex-end;
   margin: 20px 0;
-  height: 700px;
+  height: 60vh;
 }
 
 .division {
@@ -222,6 +222,16 @@ main > img {
 }
 
 @media (max-width: 600px) {
+  h1 {
+    font-size: 1.8em;
+  }
+  h2 {
+    font-size: 1.2em;
+  }
+  h3 {
+    font-size: 1.2em;
+  }
+
   main > img {
     width: 100px;
   }
