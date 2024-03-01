@@ -61,63 +61,170 @@ const total_votes: ComputedRef<number> = computed(() => {
     <hgroup>
       <h1>FuM Candidature 2024</h1>
       <h2>Number of Candidates by Division</h2>
-      <h3>Apply now at <a href="https://fumval.se">fumval.se</a></h3>
+      <h3>Apply now at <a href="https://fumval.se">Fumval.se</a></h3>
     </hgroup>
-    <div class="division" v-for="(division, index) in vote_data" :key="division.name">
-      <div class="position">{{ index + 1 }}.</div>
-      <div class="candidates">{{ division.candidates }}</div>
-      <div class="bar" :style="'width: ' +
-        division.candidates * 3.5 +
-        '%; background-color: ' +
-        colours_by_division[division.name] +
-        ';'
-        "></div>
-      <div class="name">{{ division.name }}</div>
-    </div>
     <img src="@/assets/logo.svg" alt="Logo for Fullmäktige Election 2024">
+    <div class="division-wrapper">
+      <div class="division" v-for="(division, index) in vote_data" :key="division.name">
+          <div class="candidates">{{ division.candidates }}</div>
+          <div class="bar-desktop" :style="'height: ' +
+            division.candidates * 8 +
+            '%; background-color: ' +
+            colours_by_division[division.name] +
+            ';'
+            "></div>
+          <div class="bar-mobile" :style="'width: ' +
+            division.candidates * 6 +
+            '%; background-color: ' +
+            colours_by_division[division.name] +
+            ';'
+            "></div>
+          <!-- <div class="position">{{ index + 1 }}.</div> -->
+          <div class="name">{{ division.name }}</div>
+      </div>
+    </div>
   </main>
 </template>
 
 <style scoped>
+
+main {
+  max-width: 1280px;
+  padding: 3rem;
+  font-weight: normal;
+  background-color: white;
+  border-radius: 10px;
+}
+
 h1 {
+  font-weight: 900;
+  font-size: 3em;
+  font-style: italic;
+  filter: drop-shadow(5px 5px 0px #00ACFF11);
+}
+
+h2 {
   font-weight: bold;
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.5em;
+}
+
+hgroup a {
+  display: inline-block;
+  font-style: italic;
+  padding: 0px 10px;
+  border-radius: 7px;
+  background-color: #00acff;
+  color: white;
+  text-decoration: 0.5px underline;
+  font-weight: bold;
+  transition: 0.3s;
+}
+
+hgroup a:hover {
+  background-color: #007fbe;
+  text-decoration: none;
+  filter: drop-shadow(3px 3px 0px #00ACFF11);
 }
 
 hgroup {
-  text-align: center;
-  margin: 20px 0;
+  margin-bottom: 20px;
 }
 
 .division>div {
   padding: 5px;
   margin-bottom: 5px;
-  height: 34px;
 }
 
-.bar {
-  background-color: var(--vt-c-red);
-}
-
-.total>.bar {
-  background-color: var(--vt-c-blue);
-}
-
-.position {
-  width: 26px;
-  font-weight: bold;
-}
-
-.name {
-  font-weight: bold;
-}
-
-.candidates {
-  width: 50px;
-  /* font-weight: bold; */
+.division-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-end;
+  margin: 20px 0;
+  height: 700px;
 }
 
 .division {
-  width: 100%;
-  display: inline-flex;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  height: 100%;
+  width: 4vw;
+  margin: 0 5px;
 }
+
+.candidates,
+.name {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.bar-desktop {
+  width: 100%;
+  transition: height 0.3s ease;
+}
+
+.bar-mobile {
+  display: none;
+}
+
+main > img {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 200px;
+  margin: 50px;
+  transition: width 0.3s ease;
+}
+
+@media (max-width: 1000px) {
+  main {
+    padding: 2rem;
+    min-width: 90vw;
+  }
+  .bar-desktop {
+    display: none;
+  }
+
+  .bar-mobile {
+    display: block;
+    transition: width 0.3s ease;
+  }
+  .division-wrapper {
+    flex-direction: column;
+    height: 100%;
+  }
+  .division {
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    justify-content: flex-end;
+    width: 100%;
+  }
+
+  .division>div {
+    height: 40px;
+  }
+  .name {
+    width: 55px;
+    text-align: center;
+  }
+
+  main > img {
+    top: initial;
+    bottom: 0;
+    width: 175px;
+  }
+}
+
+@media (max-width: 600px) {
+  main > img {
+    width: 100px;
+  }
+}
+
 </style>
