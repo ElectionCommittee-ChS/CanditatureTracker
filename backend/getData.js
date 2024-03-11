@@ -1,5 +1,5 @@
 // Import dependencies
-const fs = require("fs");
+const fs = require("node:fs");
 const { google } = require("googleapis");
 
 const service = google.sheets("v4");
@@ -65,7 +65,7 @@ async function getData() {
         if (numOfCandidates[row[3]] !== undefined) {
           numOfCandidates[row[3]] += 1
         } else {
-          console.log("Invalid division: " + row[3])
+          console.log(`Invalid division: ${row[3]}`)
         }
       }
 
@@ -73,12 +73,12 @@ async function getData() {
       console.log("No data found.");
     }
 
-    let candidatesArray = Object.entries(numOfCandidates).map(([name, candidates]) => ({ name, candidates }));
+    const candidatesArray = Object.entries(numOfCandidates).map(([name, candidates]) => ({ name, candidates }));
     // sort by candidates
     candidatesArray.sort((a, b) => b.candidates - a.candidates);
 
     // Saved the numOfCandidates
-    fs.writeFileSync("public/data.json", JSON.stringify(candidatesArray), function (err, file) {
+    fs.writeFileSync("public/data.json", JSON.stringify(candidatesArray), (err) => {
       if (err) throw err;
       console.log("Saved!");
     });

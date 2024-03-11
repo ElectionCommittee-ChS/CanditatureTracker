@@ -51,9 +51,10 @@ const vote_data: Ref<Candidates[]> = ref([])
 
 get_vote_data()
 
-const total_votes: ComputedRef<number> = computed(() => {
+const total_candidates: ComputedRef<number> = computed(() => {
   return vote_data.value.reduce((sum: number, div: Candidates) => sum + div.candidates, 0)
 })
+
 </script>
 
 <template>
@@ -61,26 +62,27 @@ const total_votes: ComputedRef<number> = computed(() => {
     <hgroup>
       <h1>FuM Candidature 2024</h1>
       <h2>Number of Candidates by Division</h2>
-      <h3>Apply now at <a href="https://fumval.se">Fumval.se</a></h3>
+      <h3>Join the {{ total_candidates }} other candidates who have already applied!<br>
+        Apply now at <a href="https://fumval.se">Fumval.se</a></h3>
     </hgroup>
     <img src="@/assets/logo.svg" alt="Logo for Fullmäktige Election 2024">
     <div class="division-wrapper">
       <div class="division" v-for="(division, index) in vote_data" :key="division.name">
-          <div class="candidates">{{ division.candidates }}</div>
-          <div class="bar-desktop" :style="'height: ' +
+        <div class="candidates">{{ Math.round(division.candidates / total_candidates * 100) }}%</div>
+        <div class="bar-desktop" :style="'height: ' +
             division.candidates * 8 +
             '%; background-color: ' +
             colours_by_division[division.name] +
             ';'
             "></div>
-          <div class="bar-mobile" :style="'width: ' +
+        <div class="bar-mobile" :style="'width: ' +
             division.candidates * 6 +
             '%; background-color: ' +
             colours_by_division[division.name] +
             ';'
             "></div>
-          <!-- <div class="position">{{ index + 1 }}.</div> -->
-          <div class="name">{{ division.name }}</div>
+        <!-- <div class="position">{{ index + 1 }}.</div> -->
+        <div class="name">{{ division.name }}</div>
       </div>
     </div>
   </main>
