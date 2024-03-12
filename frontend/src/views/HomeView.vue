@@ -61,8 +61,8 @@ const total_candidates: ComputedRef<number> = computed(() => {
   <main>
     <hgroup>
       <h1>FuM Candidature 2024</h1>
-      <h2>There are Currently {{ total_candidates }} Candidates</h2>
-      <h2>Percentage of Candidates by Division</h2>
+      <h2>CURRENT TOTAL: {{ total_candidates }}</h2>
+      <h2>Percentage of candidates by student divisions</h2>
       <h3>Apply now at <a href="https://fumval.se">Fumval.se</a></h3>
     </hgroup>
     <img src="@/assets/logo.svg" alt="Logo for Fullmäktige Election 2024">
