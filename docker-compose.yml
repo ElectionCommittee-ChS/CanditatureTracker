@@ -8,6 +8,3 @@ services:
       - PORT=3000
     volumes:
       - ./backend/secret:/usr/src/app/backend/secret
-
-volumes:
-  canditature-secrets:

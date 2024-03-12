@@ -46,3 +46,9 @@ npm run build
 npm install
 npm run dev
 ```
+
+### Test docker-compose
+
+```sh
+docker-compose up --build --force-recreate
+```
