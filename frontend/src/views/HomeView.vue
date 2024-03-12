@@ -7,9 +7,9 @@ interface Candidates {
   candidates: number
 }
 
-interface divisions {
-  [key: string]: number
-}
+// interface divisions {
+//   [key: string]: number
+// }
 
 interface colours {
   [key: string]: string
@@ -67,7 +67,7 @@ const total_candidates: ComputedRef<number> = computed(() => {
     </hgroup>
     <img src="@/assets/logo.svg" alt="Logo for Fullmäktige Election 2024">
     <div class="division-wrapper">
-      <div class="division" v-for="(division, index) in vote_data" :key="division.name">
+      <div class="division" v-for="(division) in vote_data" :key="division.name">
         <div class="candidates">{{ Math.round(division.candidates / total_candidates * 100) }}%</div>
         <div class="bar-desktop" :style="'height: ' +
         division.candidates * 8 +
