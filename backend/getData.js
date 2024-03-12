@@ -4,6 +4,7 @@ const { google } = require("googleapis");
 
 const service = google.sheets("v4");
 const credentials = require("./secret/credentials.json");
+const dev = process.env.NODE_ENV !== "production";
 
 // Configure auth client
 const authClient = new google.auth.JWT(
@@ -82,6 +83,14 @@ async function getData() {
       if (err) throw err;
       console.log("Saved!");
     });
+
+    // if dev also save to the public folder in frontend
+    if (dev) {
+      fs.writeFileSync("../frontend/public/data.json", JSON.stringify(candidatesArray), (err) => {
+        if (err) throw err;
+        console.log("Saved in frontend also!");
+      });
+    }
 
   } catch (error) {
 

@@ -18,3 +18,31 @@ services:
 volumes:
   canditature-secrets:
 ```
+
+## Development
+
+This could be made smoother but this works for now:
+
+### Frontend
+
+```sh
+# in backend/
+npm install
+npm start
+
+# another terminal in frontend/
+npm install
+npm run dev
+```
+
+### Backend
+
+```sh
+# in frontend/
+npm install
+npm run build
+
+# another terminal in backend/
+npm install
+npm run dev
+```
