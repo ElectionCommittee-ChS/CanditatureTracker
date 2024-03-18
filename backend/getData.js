@@ -8,99 +8,103 @@ const dev = process.env.NODE_ENV !== "production";
 
 // Configure auth client
 const authClient = new google.auth.JWT(
-  credentials.client_email,
-  null,
-  credentials.private_key.replace(/\\n/g, "\n"),
-  ["https://www.googleapis.com/auth/spreadsheets"]
+	credentials.client_email,
+	null,
+	credentials.private_key.replace(/\\n/g, "\n"),
+	["https://www.googleapis.com/auth/spreadsheets"],
 );
 
 async function getData() {
-  try {
+	try {
+		// Authorize the client
+		const token = await authClient.authorize();
 
-    // Authorize the client
-    const token = await authClient.authorize();
+		// Set the client credentials
+		authClient.setCredentials(token);
 
-    // Set the client credentials
-    authClient.setCredentials(token);
+		// Get the rows
+		const res = await service.spreadsheets.values.get({
+			auth: authClient,
+			spreadsheetId: "1qfd-yGu1Wl8VovGRwG-tcUIBWAwbqI23_fkFUxauQeA",
+			range: "A:G",
+		});
 
-    // Get the rows
-    const res = await service.spreadsheets.values.get({
-      auth: authClient,
-      spreadsheetId: "1qfd-yGu1Wl8VovGRwG-tcUIBWAwbqI23_fkFUxauQeA",
-      range: "A:G",
-    });
+		// All of the answers
+		const numOfCandidates = {
+			A: 0,
+			AE: 0,
+			D: 0,
+			DS: 0,
+			E: 0,
+			F: 0,
+			GS: 0,
+			H: 0,
+			I: 0,
+			IT: 0,
+			K: 0,
+			KfKb: 0,
+			M: 0,
+			Sjö: 0,
+			TB: 0,
+			TD: 0,
+			V: 0,
+			Z: 0,
+		};
 
-    // All of the answers
-    const numOfCandidates = {
-      A: 0,
-      AE: 0,
-      D: 0,
-      DS: 0,
-      E: 0,
-      F: 0,
-      GS: 0,
-      H: 0,
-      I: 0,
-      IT: 0,
-      K: 0,
-      KfKb: 0,
-      M: 0,
-      Sjö: 0,
-      TB: 0,
-      TD: 0,
-      V: 0,
-      Z: 0
-    }
+		// Set rows to equal the rows
+		const rows = res.data.values;
 
-    // Set rows to equal the rows
-    const rows = res.data.values;
+		// Check if we have any data and if we do add it to our answers array
+		if (rows.length) {
+			// Remove the headers
+			rows.shift();
 
-    // Check if we have any data and if we do add it to our answers array
-    if (rows.length) {
+			// For each row
+			for (const row of rows) {
+				if (numOfCandidates[row[3]] !== undefined) {
+					numOfCandidates[row[3]] += 1;
+				} else {
+					console.log(`Invalid division: ${row[3]}`);
+				}
+			}
+		} else {
+			console.log("No data found.");
+		}
 
-      // Remove the headers
-      rows.shift()
+		const candidatesArray = Object.entries(numOfCandidates).map(
+			([name, candidates]) => ({ name, candidates }),
+		);
+		// sort by candidates
+		candidatesArray.sort((a, b) => b.candidates - a.candidates);
 
-      // For each row
-      for (const row of rows) {
-        if (numOfCandidates[row[3]] !== undefined) {
-          numOfCandidates[row[3]] += 1
-        } else {
-          console.log(`Invalid division: ${row[3]}`)
-        }
-      }
+		// Saved the numOfCandidates
+		fs.writeFileSync(
+			"../frontend/dist/data.json",
+			JSON.stringify(candidatesArray),
+			(err) => {
+				if (err) throw err;
+				console.log("Saved!");
+			},
+		);
 
-    } else {
-      console.log("No data found.");
-    }
+		// if dev also save to the public folder in frontend
+		if (dev) {
+			fs.writeFileSync(
+				"../frontend/public/data.json",
+				JSON.stringify(candidatesArray),
+				(err) => {
+					if (err) throw err;
+					console.log("Saved in frontend also!");
+				},
+			);
+		}
+	} catch (error) {
+		// Log the error
+		console.log(error);
 
-    const candidatesArray = Object.entries(numOfCandidates).map(([name, candidates]) => ({ name, candidates }));
-    // sort by candidates
-    candidatesArray.sort((a, b) => b.candidates - a.candidates);
-
-    // Saved the numOfCandidates
-    fs.writeFileSync("public/data.json", JSON.stringify(candidatesArray), (err) => {
-      if (err) throw err;
-      console.log("Saved!");
-    });
-
-    // if dev also save to the public folder in frontend
-    if (dev) {
-      fs.writeFileSync("../frontend/public/data.json", JSON.stringify(candidatesArray), (err) => {
-        if (err) throw err;
-        console.log("Saved in frontend also!");
-      });
-    }
-
-  } catch (error) {
-
-    // Log the error
-    console.log(error);
-
-    // Exit the process with error
-    process.exit(1);
-
-  }
+		// Exit the process with error
+		process.exit(1);
+	}
 }
 
 module.exports = getData;
