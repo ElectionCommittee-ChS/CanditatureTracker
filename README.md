@@ -1,7 +1,19 @@
 # Tracker for FuM Candidature
+
 Display live stats of registered candidates for FuM.
 
+## How to update?
+
+1. Update `spreadsheetId` in `backend/getData.js` with the correct spreadsheet id.
+2. Push to github
+
+### How to change account
+
+1. Create a `credentials.json`
+2. Update `backend/secret/credentials.json` with the correct data on the server.
+
 ## Deploy
+
 Easiest with docker-compose:
 
 ```yml
