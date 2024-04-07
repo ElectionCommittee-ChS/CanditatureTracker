@@ -3,7 +3,8 @@ const express = require('express');
 
 getData();
 // update data every 15 minutes
-setInterval(getData, 15 * 60 * 1000);
+// chainging this to 24 hours since not in use anymore, please change back when used!
+setInterval(getData, 24 * 60 * 60 * 1000);
 
 const app = express();
 const port = process.env.PORT || 3000;
