@@ -26,7 +26,7 @@ async function getData() {
 		const res = await service.spreadsheets.values.get({
 			auth: authClient,
 			spreadsheetId: "1is9j5_Y6g0N5S9Dxp2QPISU-47OFZz58dUspbX-FTn8",
-			range: "A:G",
+			range: "A:I",
 		});
 
 		// All of the answers
@@ -61,10 +61,10 @@ async function getData() {
 
 			// For each row
 			for (const row of rows) {
-				if (numOfCandidates[row[3]] !== undefined) {
-					numOfCandidates[row[3]] += 1;
+				if (numOfCandidates[row[4]] !== undefined) {
+					numOfCandidates[row[4]] += 1;
 				} else {
-					console.log(`Invalid division: ${row[3]}`);
+					console.log(`Invalid division: ${row[4]}`);
 				}
 			}
 		} else {
