@@ -2,8 +2,8 @@ const getData = require('./getData.js');
 const express = require('express');
 
 getData();
-// update data every 15 minutes
-// chainging this to 24 hours since not in use anymore, please change back when used!
+// update data every 15 minutes (15 * 60 * 1000)
+// Change to 24 hours when not in use anymore, please change back when used! (24 * 60 * 60 * 1000)
 setInterval(getData, 15 * 60 * 1000);
 
 const app = express();

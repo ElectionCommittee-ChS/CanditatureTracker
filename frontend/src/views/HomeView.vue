@@ -60,12 +60,12 @@ const total_candidates: ComputedRef<number> = computed(() => {
 <template>
   <main>
     <hgroup>
-      <h1>FuM Candidature 2024</h1>
+      <h1>FuM Candidature 2025</h1>
       <h2>CURRENT TOTAL: {{ total_candidates }}</h2>
       <h2>Percentage of candidates by student divisions</h2>
       <h3>Apply now at <a href="https://fumval.se">Fumval.se</a></h3>
     </hgroup>
-    <img src="@/assets/logo.svg" alt="Logo for Fullmäktige Election 2024">
+    <img src="@/assets/logo.svg" alt="Logo for Fullmäktige Election 2025">
     <div class="division-wrapper">
       <div class="division" v-for="(division) in vote_data" :key="division.name">
         <div class="candidates">{{ Math.round(division.candidates / total_candidates * 100) }}%</div>
