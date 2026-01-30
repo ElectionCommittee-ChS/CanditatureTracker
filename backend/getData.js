@@ -25,7 +25,7 @@ async function getData() {
 		// Get the rows
 		const res = await service.spreadsheets.values.get({
 			auth: authClient,
-			spreadsheetId: "1is9j5_Y6g0N5S9Dxp2QPISU-47OFZz58dUspbX-FTn8",
+			spreadsheetId: "17CnZqRY9U5et3g1MWKcZ4vGMLQpcXuO5Llp-J7hOI0U",
 			range: "A:I",
 		});
 
