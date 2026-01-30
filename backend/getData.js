@@ -26,7 +26,7 @@ async function getData() {
 		const res = await service.spreadsheets.values.get({
 			auth: authClient,
 			spreadsheetId: "17CnZqRY9U5et3g1MWKcZ4vGMLQpcXuO5Llp-J7hOI0U",
-			range: "A:I",
+			range: "A:G",
 		});
 
 		// All of the answers
