@@ -61,10 +61,10 @@ async function getData() {
 
 			// For each row
 			for (const row of rows) {
-				if (numOfCandidates[row[4]] !== undefined) {
-					numOfCandidates[row[4]] += 1;
+				if (numOfCandidates[row[3]] !== undefined) {
+					numOfCandidates[row[3]] += 1;
 				} else {
-					console.log(`Invalid division: ${row[4]}`);
+					console.log(`Invalid division: ${row[3]}`);
 				}
 			}
 		} else {
